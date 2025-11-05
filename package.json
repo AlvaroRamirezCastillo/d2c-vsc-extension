@@ -3,6 +3,9 @@
   "displayName": "Design to code",
   "description": "Generate code from figma",
   "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "vscode": "^1.105.0"
   },
