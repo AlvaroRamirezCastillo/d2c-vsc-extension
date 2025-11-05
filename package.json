@@ -1,5 +1,5 @@
 {
-  "name": "@takumi/d2c-extension",
+  "name": "@takumi-tech/d2c-extension",
   "displayName": "Design to code",
   "description": "Generate code from figma",
   "version": "1.0.0",
