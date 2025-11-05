@@ -2,7 +2,7 @@
   "name": "@takumi/d2c-extension",
   "displayName": "Design to code",
   "description": "Generate code from figma",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.105.0"
   },
