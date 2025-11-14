@@ -7,13 +7,34 @@ export class FigmaMcpClient {
   constructor(
     private nodeId: string
   ) {
-    this.client = new Client({ name: 'd2c-client', version: '0.1.0' });
+    this.client = new Client(
+      { name: 'd2c-client', version: '0.1.0' },
+      {
+        capabilities: {
+
+        }
+      }
+    );
   }
 
   async connect() {
     const transport = new StreamableHTTPClientTransport(
       new URL('http://127.0.0.1:3845/mcp')
     );
+
+    const originalOnMessage = transport.onmessage;
+
+    transport.onmessage = (msg: any) => {
+      if (msg?.result?.serverInfo?.icons) {
+        for (const icon of msg.result.serverInfo.icons) {
+          if (typeof icon.sizes === "string") {
+            icon.sizes = [icon.sizes];  // fix bug
+          }
+        }
+      }
+
+      if (originalOnMessage) originalOnMessage(msg);
+    };
 
     await this.client.connect(transport);
   }
