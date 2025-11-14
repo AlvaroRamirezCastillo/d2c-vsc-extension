@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Botón IA</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .ai-button {
+      position: relative;
+      padding: 2px; /* grosor del borde degradado */
+      border-radius: 999px;
+      background: linear-gradient(135deg, #6d5dfc, #ff4ecd, #36e4da);
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      animation: aiGlow 6s linear infinite;
+    }
+
+    .ai-button-inner {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.6rem 1.3rem;
+      border-radius: inherit;
+      background: whitesmoke;
+      color: #f9fafb;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .ai-button-label {
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .ai-button-label-main {
+      font-size: 0.9rem;
+      color: black;
+    }
+
+    .ai-button-label-sub {
+      font-size: 0.7rem;
+      opacity: 0.8;
+      color: black;
+    }
+
+    .ai-button:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.7);
+    }
+
+    .ai-button:active {
+      transform: translateY(0) scale(0.99);
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.6);
+    }
+
+    @keyframes aiGlow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <button class="ai-button">
+    <div class="ai-button-inner">
+      <span class="ai-button-label">
+        <span class="ai-button-label-main">Generar código con IA</span><br />
+        <span class="ai-button-label-sub">Pídele a la IA que lo haga</span>
+      </span>
+    </div>
+  </button>
+</body>
+</html>
