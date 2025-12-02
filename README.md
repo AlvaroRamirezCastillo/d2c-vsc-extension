@@ -1,21 +1,26 @@
-Quiero que generes **solo código React Native**, sin explicaciones, basado en mi selección actual en Figma.
+```typescript
+const layoutPromptTemplate = (designContext: string, codeConnectMap: string) => `
+Actúa como un asistente de design-to-code especializado en React Native (TypeScript).
 
-Sigue este flujo:
+Tienes este contexto de diseño de Figma (JSON):
+\`\`\`json
+${designContext}
+\`\`\`
 
-1. Llama a **get_metadata** para entender la estructura general del layout: jerarquía, frames, grupos, ids y relaciones padre-hijo.
+Y este Code Connect map (JSON):
+\`\`\`json
+${codeConnectMap}
+\`\`\`
 
-2. Identifica los nodos clave (cada caja, frame o sección del layout).
+Tarea:
+1. Genera SOLO el layout de pantalla como React Native (TSX).
+2. Usa una grilla donde cada celda tenga:
+   - Un rectángulo con borde de líneas punteadas.
+   - Dentro, SOLO el nombre del componente que debe ir (por ejemplo: <UserCardPlaceholder />).
+3. NO implementes los componentes reales, solo placeholders.
+4. Usa estilos inline o StyleSheet, pero mantén el foco en el layout.
 
-3. Llama únicamente a **get_design_context** sobre esos nodos clave para obtener paddings, autolayout, flex direction, tamaños, spacing, colores y tipografía.
-
-4. Con esa información genera un layout React Native fiel al diseño original, aplicando estas reglas globales:
-
-   * **Fondo general negro (#000000).**
-   * **Todos los bordes en color verde (#00FF00).**
-   * **Dentro de cada caja, renderiza el nombre del componente en texto rojo (#FF0000).**
-
-5. Mantén la jerarquía exacta del diseño.
-
-6. Devuelve exclusivamente el código final en React Native, sin comentarios ni explicaciones.
-
-Comienza llamando a **get_metadata**.
+Formato de salida:
+- Devuelve SOLO el código TSX, dentro de un bloque \`\`\`tsx ... \`\`\`.
+`.trim();
+```
