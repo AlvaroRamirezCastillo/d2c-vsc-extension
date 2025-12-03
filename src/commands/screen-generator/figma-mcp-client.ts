@@ -1,5 +1,7 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
+import { promises as fs } from 'fs';
+import path from 'path';
 
 export class FigmaMcpClient {
   private client: Client;
@@ -57,12 +59,37 @@ export class FigmaMcpClient {
         clientFrameworks: 'react',
       }
     });
+    const screenshot = await this.client.callTool({
+      name: 'get_screenshot',
+      arguments: {
+        nodeId,
+        format: 'png',
+        scale: 2,
+      }
+    });
 
     await this.client.close();
+
+    this.writeFileWithDirs('/Users/alvaro/Downloads/alvaro.ts', JSON.stringify({
+      designContext,
+      codeConnectMap,
+      screenshot,
+    }));
 
     return {
       designContext,
       codeConnectMap,
+      screenshot,
     };
+  }
+
+  async writeFileWithDirs(filePath: any, content: any) {
+    const dir = path.dirname(filePath);
+
+    // Crea el directorio (y subdirectorios) si no existen
+    await fs.mkdir(dir, { recursive: true });
+
+    // Escribe el archivo
+    await fs.writeFile(filePath, content, 'utf8');
   }
 }
